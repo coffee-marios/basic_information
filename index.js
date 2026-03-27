@@ -1,10 +1,28 @@
 const express = require("express");
+const path = require("path");
+
 const app = express();
 
+app.use(express.static("public"));
+
+// Serve static files
+app.use(express.static(path.join(__dirname, "pages")));
+
+// Routes
+
 app.get("/", (req, res) => {
-  res.send("Hello from Node!");
+  res.sendFile(path.join(__dirname, "pages", "index.html"));
 });
 
-app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+app.get("/about", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages", "about.html"));
 });
+
+app.get("/contact", (req, res) => {
+  res.sendFile(path.join(__dirname, "pages", "contact-me.html"));
+});
+
+const PORT = 3000;
+app.listen(PORT, () =>
+  console.log(`Server (index) running on http://localhost:${PORT}`)
+);
