@@ -22,7 +22,12 @@ app.get("/contact", (req, res) => {
   res.sendFile(path.join(__dirname, "pages", "contact-me.html"));
 });
 
-const PORT = 3000;
+// 404 page
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, "pages", "404.html"));
+});
+
+const PORT = 8080;
 app.listen(PORT, () =>
   console.log(`Server (index) running on http://localhost:${PORT}`)
 );
